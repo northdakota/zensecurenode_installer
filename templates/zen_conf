@@ -1,0 +1,16 @@
+#!/bin/bash
+
+RPC_USERNAME=$(pwgen -s 16 1)
+RPC_PASSWORD=$(pwgen -s 64 1)
+
+read -d '' ZEN_CONF <<EOF
+rpcuser=$RPC_USERNAME
+rpcpassword=$RPC_PASSWORD
+rpcport=18231
+rpcallowip=127.0.0.1
+server=1
+daemon=1
+listen=1
+txindex=1
+logtimestamps=1
+EOF
