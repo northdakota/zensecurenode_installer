@@ -152,7 +152,7 @@ EOF
 
 function createZAddress() {
 
-    if [ $(zen-cli z_listaddresses | jq '. | length') = 0 ]; then
+    if [ ! $(zen-cli z_listaddresses | jq '. | length') = 0 ]; then
         # private address already exists. skip this
         return 0
     fi
@@ -183,8 +183,8 @@ function installTracker () {
     echo -n "$IP_VERSION"       >> ${USER_HOMEDIR}/zencash/secnodetracker/config/ipv
     echo -n "$STACK_ADDRESS"    >> ${USER_HOMEDIR}/zencash/secnodetracker/config/stakeaddr
 
-    cd /home/ubuntu/zencash/secnodetracker && yes "" | node setup.js
-    cd /home/ubuntu/zencash/secnodetracker && pm2 start app.js --name securenodetracker
+    cd ${USER_HOMEDIR}/zencash/secnodetracker && yes "" | node setup.js
+    cd ${USER_HOMEDIR}/zencash/secnodetracker && pm2 start app.js --name securenodetracker
 
     pm2 stop all
 }
