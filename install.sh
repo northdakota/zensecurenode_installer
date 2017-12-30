@@ -177,6 +177,7 @@ function installTracker () {
         mkdir ${USER_HOMEDIR}/zencash
         cd ${USER_HOMEDIR}/zencash && git clone https://github.com/ZencashOfficial/secnodetracker.git
         cd ${USER_HOMEDIR}/zencash/secnodetracker && npm install
+        cd ${USER_HOMEDIR}/zencash/secnodetracker && sudo npm install pm2 -g
     fi
 
     if [ -d "$USER_HOMEDIR/zencash" ]; then
