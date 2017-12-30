@@ -192,6 +192,12 @@ function installTracker () {
 function checkBlockSynchronization() {
     while true
         do
+            zen-cli getpeerinfo &> /dev/null
+            if [ $? -eq 0 ]; then
+                sleep 2
+                continue
+            fi
+
             CURRENT_BLOCK=$(zen-cli getblockcount)
             NETWORK_BLOCK=$(zen-cli getpeerinfo | jq '.[0].startingheight')
 
