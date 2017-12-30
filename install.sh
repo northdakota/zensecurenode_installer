@@ -201,8 +201,11 @@ function checkBlockSynchronization() {
             CURRENT_BLOCK=$(zen-cli getblockcount)
             NETWORK_BLOCK=$(zen-cli getpeerinfo | jq '.[0].startingheight')
 
-            if [ "$CURRENT_BLOCK" -ge "$NETWORK_BLOCK" ]; then
-                break
+
+            if [ -z "$NETWORK_BLOCK" ]; then
+                if [ "$CURRENT_BLOCK" -ge "$NETWORK_BLOCK" ]; then
+                    break
+                fi
             fi
 
             echo -ne "Synchronizing blockchain... ${CURRENT_BLOCK}/${NETWORK_BLOCK}\r"
