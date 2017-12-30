@@ -173,9 +173,15 @@ function installTracker () {
     npm install -g n
     n latest
 
-    mkdir ${USER_HOMEDIR}/zencash
-    cd ${USER_HOMEDIR}/zencash && git clone https://github.com/ZencashOfficial/secnodetracker.git
-    cd ${USER_HOMEDIR}/zencash/secnodetracker && npm install
+    if [ ! -d "$USER_HOMEDIR/zencash" ]; then
+        mkdir ${USER_HOMEDIR}/zencash
+        cd ${USER_HOMEDIR}/zencash && git clone https://github.com/ZencashOfficial/secnodetracker.git
+        cd ${USER_HOMEDIR}/zencash/secnodetracker && npm install
+    fi
+
+    if [ -d "$USER_HOMEDIR/zencash" ]; then
+        rm -rf ${USER_HOMEDIR}/zencash/secnodetracker/config/*
+    fi
 
     mkdir ${USER_HOMEDIR}/zencash/secnodetracker/config
     echo -n "$FQDN"             >> ${USER_HOMEDIR}/zencash/secnodetracker/config/fqdn
