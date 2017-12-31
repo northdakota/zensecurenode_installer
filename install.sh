@@ -191,9 +191,9 @@ function installTracker () {
     echo -n "$STACK_ADDRESS"    >> ${USER_HOMEDIR}/zencash/secnodetracker/config/stakeaddr
 
     cd ${USER_HOMEDIR}/zencash/secnodetracker && yes "" | node setup.js
-    cd ${USER_HOMEDIR}/zencash/secnodetracker && pm2 start app.js --name securenodetracker
+    cd ${USER_HOMEDIR}/zencash/secnodetracker && sudo pm2 start app.js --name securenodetracker
 
-    pm2 stop all
+    sudo pm2 stop all
 }
 
 function checkBlockSynchronization() {
