@@ -4,5 +4,5 @@
 git clone https://github.com/northdakota/zensecurenode_installer.git
 cd zensecurenode_installer
 chmod u+x install.sh
-./install.sh
+sudo ./install.sh
 ```
