@@ -227,6 +227,12 @@ function printFinishInstructions() {
     echo "After that start your tracker using following command: pm2 start all"
 }
 
+# HOT FIX fix user permissions
+function fixPermissions()
+{
+    sudo chown ${USER_OPERATOR}:${USER_OPERATOR} ${USER_HOMEDIR}
+}
+
 # Ask a root privileges
 if [[ $UID != 0 ]]; then
     echo "Please run ${prog} with sudo:"
@@ -257,5 +263,8 @@ createZAddress
 checkBlockSynchronization
 
 installTracker
+
+# HOT FIX
+fixPermissions
 
 printFinishInstructions
