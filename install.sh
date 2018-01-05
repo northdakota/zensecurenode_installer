@@ -208,6 +208,8 @@ function checkBlockSynchronization() {
             CURRENT_BLOCK=$(zen-cli getblockcount)
             NETWORK_BLOCK=$(zen-cli getpeerinfo | jq '.[0].startingheight')
 
+            CURRENT_BLOCK=$((CURRENT_BLOCK + 0))
+            NETWORK_BLOCK=$((NETWORK_BLOCK + 0))
 
             if [ -z "$NETWORK_BLOCK" ]; then
                 if (( "$CURRENT_BLOCK" >= "$NETWORK_BLOCK" )); then
