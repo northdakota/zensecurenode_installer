@@ -130,10 +130,10 @@ function installCertificate () {
         return 0
     fi
 
-    cd && git clone https://github.com/Neilpang/acme.sh.git
-    cd acme.sh && ./acme.sh --install
+    cd ${USER_HOMEDIR} && git clone https://github.com/Neilpang/acme.sh.git
+    cd ${USER_HOMEDIR}/acme.sh && ./acme.sh --install
 
-    ~/.acme.sh/acme.sh --issue --standalone -d ${FQDN}
+    св ${USER_HOMEDIR}/acme.sh && ./acme.sh --issue --standalone -d ${FQDN}
 
     if [ ! -f ${USER_HOMEDIR}/.acme.sh/${FQDN}/ca.cer ]; then
         echo "Certificate was not installed, please check logs above."
@@ -227,6 +227,12 @@ function printFinishInstructions() {
     echo "After that start your tracker using following command: pm2 start all"
 }
 
+# HOT FIX fix user permissions
+function fixPermissions()
+{
+    sudo chown ${USER_OPERATOR}:${USER_OPERATOR} ${USER_HOMEDIR}
+}
+
 # Ask a root privileges
 if [[ $UID != 0 ]]; then
     echo "Please run ${prog} with sudo:"
@@ -257,5 +263,8 @@ createZAddress
 checkBlockSynchronization
 
 installTracker
+
+# HOT FIX
+fixPermissions
 
 printFinishInstructions
