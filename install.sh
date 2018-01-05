@@ -131,9 +131,9 @@ function installCertificate () {
     fi
 
     cd ${USER_HOMEDIR} && git clone https://github.com/Neilpang/acme.sh.git
-    cd ${USER_HOMEDIR}/acme.sh && ./acme.sh --install
+    cd ${USER_HOMEDIR}/.acme.sh && ./acme.sh --install
 
-    св ${USER_HOMEDIR}/acme.sh && ./acme.sh --issue --standalone -d ${FQDN}
+    св ${USER_HOMEDIR}/.acme.sh && ./acme.sh --issue --standalone -d ${FQDN}
 
     if [ ! -f ${USER_HOMEDIR}/.acme.sh/${FQDN}/ca.cer ]; then
         echo "Certificate was not installed, please check logs above."
