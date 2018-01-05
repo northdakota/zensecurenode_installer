@@ -210,7 +210,7 @@ function checkBlockSynchronization() {
 
 
             if [ -z "$NETWORK_BLOCK" ]; then
-                if [ "$CURRENT_BLOCK" -ge "$NETWORK_BLOCK" ]; then
+                if (( "$CURRENT_BLOCK" >= "$NETWORK_BLOCK" )); then
                     break
                 fi
             fi
