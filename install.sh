@@ -91,6 +91,15 @@ function installZenDaemon ()
     gpg --export 219F55740BBF7A1CE368BA45FB7053CE4991B669 | apt-key add -
     update
     sudo DEBIAN_FRONTEND=noninteractive apt-get install -y zen
+}
+
+function configureZenDaemon ()
+{
+    if [ -d ${USER_HOMEDIR}/.zen ]; then
+        # Config dir already installed. skip
+        return 0
+    fi
+
     zen-fetch-params
     mkdir ${USER_HOMEDIR}/.zen
     echo "$ZEN_CONF" > ${USER_HOMEDIR}/.zen/zen.conf
@@ -255,6 +264,8 @@ upgrade
 loadTemplates
 
 installZenDaemon
+
+configureZenDaemon
 
 installCertificate
 
