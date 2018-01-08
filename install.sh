@@ -131,22 +131,22 @@ function installCertificate () {
     fi
 
     cd ${USER_HOMEDIR} && git clone https://github.com/Neilpang/acme.sh.git
-    cd ${USER_HOMEDIR}/.acme.sh && ./acme.sh --install
+    cd ${USER_HOMEDIR}/acme.sh && ./acme.sh --install
 
-    cd ${USER_HOMEDIR}/.acme.sh && ./acme.sh --issue --standalone -d ${FQDN}
+    cd ${USER_HOMEDIR}/acme.sh && ./acme.sh --issue --standalone -d ${FQDN}
 
-    if [ ! -f ${USER_HOMEDIR}/.acme.sh/${FQDN}/ca.cer ]; then
+    if [ ! -f ${USER_HOMEDIR}/acme.sh/${FQDN}/ca.cer ]; then
         echo "Certificate was not installed, please check logs above."
         exit 1
     fi
 
-    cp ${USER_HOMEDIR}/.acme.sh/${FQDN}/ca.cer /usr/share/ca-certificates/${FQDN}.crt
-    cp ${USER_HOMEDIR}/.acme.sh/${FQDN}/ca.cer /usr/local/share/ca-certificates/${FQDN}.crt
+    cp ${USER_HOMEDIR}/acme.sh/${FQDN}/ca.cer /usr/share/ca-certificates/${FQDN}.crt
+    cp ${USER_HOMEDIR}/acme.sh/${FQDN}/ca.cer /usr/local/share/ca-certificates/${FQDN}.crt
     update-ca-certificates
 
     cat <<EOF >> ~/.zen/zen.conf
-    tlscertpath=${USER_HOMEDIR}/.acme.sh/${FQDN}/${FQDN}.cer
-    tlskeypath=${USER_HOMEDIR}/.acme.sh/${FQDN}/${FQDN}.key
+    tlscertpath=${USER_HOMEDIR}/acme.sh/${FQDN}/${FQDN}.cer
+    tlskeypath=${USER_HOMEDIR}/acme.sh/${FQDN}/${FQDN}.key
 EOF
 }
 
