@@ -135,7 +135,7 @@ function installCertificate () {
 
     cd ${USER_HOMEDIR}/acme.sh && sudo ./acme.sh --issue --standalone -d ${FQDN}
 
-    if [ ! -f ${USER_HOMEDIR}./acme.sh/${FQDN}/ca.cer ]; then
+    if [ ! -f ${USER_HOMEDIR}/.acme.sh/${FQDN}/ca.cer ]; then
         echo "Certificate was not installed, please check logs above."
         exit 1
     fi
